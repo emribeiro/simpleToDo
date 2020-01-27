@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple To-Do</title>
+</head>
+<body>
+    <div>
+        <h1>Simple To-Do</h1>
+
+        <form action="/newTodo" method="POST">
+            <input type="text" name="toDoName" id="toDoName" placeholder="New ToDo" required>
+            <button type="submit">New</button>
+        </form>
+
+        <ul>
+            <%=[0].name%>
+
+            <%toDos.forEach((toDo) => {%>
+                <li><a href="/todo/<%=toDo._id%>"><%=toDo.name%></a></li>
+            <%});%>
+        </ul>
+    </div>
+</body>
+</html>
