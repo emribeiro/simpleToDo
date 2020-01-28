@@ -13,41 +13,27 @@
         <h1><%=todo.name %></h1>
 
 
-        <form action="" method="POST">
+        <form action="/todo/<%=todo._id%>/newTask" method="POST">
             <input type="text" name="taskName" id="taskName" placeholder="Nova Tarefa" required>
         </form>
 
         <ul>
-            <li>
-                <span>
-                    Construir componente que usa as contas cadastradas para realizar testes no serviço de validação e efetivação de pagamento de fatura avulsa
-                </span>
-                <span class="icons">
-                    <a href=""><i class="fas fa-check"></i></a>
-                    <a href=""><i class="fas fa-exclamation"></i></a>
-                    <a href=""><i class="far fa-trash-alt"></i></a>
-                </span>
-            </li>
-
-            <li class="priorized">
-                <span>
-                    Construir componente que usa as contas cadastradas para realizar testes no serviço de validação e efetivação de pagamento de fatura avulsa
-                </span>
-                <span class="icons">
-                    <a href=""><i class="fas fa-check"></i></a>
-                    <a href=""><i class="fas fa-exclamation"></i></a>
-                    <a href=""><i class="far fa-trash-alt"></i></a>
-                </span>
-            </li>
-
-            <li class="done">
-                <span>
-                    Construir componente que usa as contas cadastradas para realizar testes no serviço de validação e efetivação de pagamento de fatura avulsa
-                </span>
-                <span class="icons">
-                    <a href=""><i class="fas fa-redo-alt"></i></i></a>
-                </span>
-            </li>
+            <% todo.tasks.forEach(function(task){%>
+                <li <% if(task.status == 3) {%>  class="finished" <%}%>>
+                    <span>
+                        <%=task.name%> -- <%=task.status%>
+                    </span>
+                    <span class="icons">
+                        <% if(task.status == 1) { %>
+                            <a href="/todo/<%=todo._id%>/done/<%=task._id%>"><i class="fas fa-check"></i></a>
+                            <a href=""><i class="fas fa-exclamation"></i></a>
+                            <a href=""><i class="far fa-trash-alt"></i></a>
+                        <% }else{ %>
+                            <a href=""><i class="fas fa-redo-alt"></i></i></a>
+                        <%}%>
+                    </span>
+                </li>            
+            <%});%>
         </ul>
 
     </div>

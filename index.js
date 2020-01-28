@@ -15,7 +15,7 @@ const taskSchema = mongoose.Schema({
     name: String,
     status: {type: Number, default: 1},
     order: {type: Number, default: 99999},
-    is_priority: Boolean,
+    is_priority: {type: Boolean, default: false},
     created_at: {type: Date, default: Date.now},
     updated_at: Date,
     finished_at: Date
@@ -50,8 +50,6 @@ app.post("/newToDo", (req, res) => {
         if(err){
             console.log(err.stack());
         }else{
-            console.log(todo);
-
             res.redirect("/");
         }
     });
@@ -71,6 +69,39 @@ app.get("/todo/:id", (req, res) => {
         }
     });
     
+});
+
+app.post("/todo/:id/newTask", function(req, res){
+    const id = req.params.id;
+    const taskName = req.body.taskName;
+    
+    task = new Task({name: taskName});
+
+    ToDo.findOneAndUpdate({_id: id}, {$push: {tasks: task}}, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+        }
+    });
+
+    return res.redirect("/todo/"+id);
+});
+
+app.get("/todo/:id/done/:taskId", (req, res) =>{
+    const id = req.params.id;
+    const taskId = req.params.taskId;
+
+    ToDo.findOneAndUpdate({'_id': id, 'tasks._id' : taskId}, {$set: {'tasks.$.status': 3}}, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+        }
+    });
+
+    return res.redirect("/todo/"+id);
+
 });
 
 app.listen(3000, function(){
