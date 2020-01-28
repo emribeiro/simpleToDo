@@ -36,7 +36,6 @@ app.get("/", (req, res) => {
 
 
     ToDo.find((err, toDos) => {
-        console.log(toDos);
         return res.render("home", {toDos: toDos});
     });
 
@@ -62,7 +61,6 @@ app.post("/newToDo", (req, res) => {
 app.get("/todo/:id", (req, res) => {
 
     const id = req.params.id;
-    console.log(id);
 
     ToDo.findById(id, (err, todo) => {
         if(err){
