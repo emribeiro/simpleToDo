@@ -56,6 +56,13 @@ li{
     justify-content: space-between;
 }
 
+.desc{
+    width: 85%;
+}
+
+.icons{
+    width: 15%;
+}
 .list-item{
     display: flex;
     flex-direction: row;
@@ -70,17 +77,22 @@ li{
 
 input[type=text]{
     outline: none;
-    border: 1px solid #E6F2F2;
+    border: 1px solid #5668CA;
     border-radius: 10px;
     padding: 20px 20px 20px 30px;
-    color: #bdc3c7;
+    color: #a29bfe;
     width: 100%;
     font-size: 16px;
-    box-shadow: 2px 2px 5px #dfe6e9;
+    box-shadow: 2px 2px 5px #5668CA;
+    font-weight: 300;
+}
+
+input[type=text]::placeholder{
+    color: #a29bfe;
 }
 
 input[type=text]:focus{
-    border: 3px solid #bdc3c7;
+    border: 3px solid #5668CA;
 }
 
 .finished{

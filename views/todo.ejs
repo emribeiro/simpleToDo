@@ -20,9 +20,9 @@
         <ul>
             <% todo.tasks.forEach(function(task){%>
                 <li <% if(task.status == 3) {%>  class="finished" <%}%>>
-                    <span>
-                        <%=task.name%> -- <%=task.status%>
-                    </span>
+                    <div class="desc">
+                        <%=task.name%>
+                    </div>
                     <span class="icons">
                         <% if(task.status == 1) { %>
                             <a href="/todo/<%=todo._id%>/done/<%=task._id%>"><i class="fas fa-check"></i></a>
