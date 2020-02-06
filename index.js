@@ -88,11 +88,39 @@ app.post("/todo/:id/newTask", function(req, res){
     return res.redirect("/todo/"+id);
 });
 
+
+app.get("/todo/:id/delete", (req, res) => {
+    const id = req.params.id;
+
+    ToDo.deleteOne({"_id" : id}, (err) => {
+        if(err){
+            console.log(err);
+        }
+    });
+
+    return res.redirect("/");
+});
 app.get("/todo/:id/done/:taskId", (req, res) =>{
     const id = req.params.id;
     const taskId = req.params.taskId;
 
     ToDo.findOneAndUpdate({'_id': id, 'tasks._id' : taskId}, {$set: {'tasks.$.status': 3}}, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+        }
+    });
+
+    return res.redirect("/todo/"+id);
+
+});
+
+app.get("/todo/:id/delete/:taskId", (req, res) =>{
+    const id = req.params.id;
+    const taskId = req.params.taskId;
+
+    ToDo.findOneAndUpdate({'_id': id}, {$pull: {'tasks' : {_id: taskId }}}, (err, result) => {
         if(err){
             console.log(err);
         }else{

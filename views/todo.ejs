@@ -27,7 +27,7 @@
                         <% if(task.status == 1) { %>
                             <a href="/todo/<%=todo._id%>/done/<%=task._id%>"><i class="fas fa-check"></i></a>
                             <a href=""><i class="fas fa-exclamation"></i></a>
-                            <a href=""><i class="far fa-trash-alt"></i></a>
+                            <a href="/todo/<%=todo._id%>/delete/<%=task._id%>"><i class="far fa-trash-alt"></i></a>
                         <% }else{ %>
                             <a href=""><i class="fas fa-redo-alt"></i></i></a>
                         <%}%>   
